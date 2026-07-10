@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Visão geral dos recursos apresentados para o GPT-5.6 Sol." />
+  <title>GPT-5.6 Sol — Recursos e Capacidades</title>
+  <style>
+    :root{
+      --bg:#07111f;
+      --panel:#0d1b2d;
+      --panel-2:#13233a;
+      --text:#edf5ff;
+      --muted:#a8b8cc;
+      --accent:#5eead4;
+      --accent-2:#60a5fa;
+      --line:rgba(255,255,255,.09);
+      --shadow:0 18px 50px rgba(0,0,0,.28);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(96,165,250,.16), transparent 28%),
+        radial-gradient(circle at 15% 18%, rgba(94,234,212,.11), transparent 24%),
+        var(--bg);
+      line-height:1.65;
+    }
+    a{color:inherit}
+    .layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+    aside{
+      position:sticky;top:0;height:100vh;padding:28px 22px;
+      background:rgba(6,16,29,.9);backdrop-filter:blur(18px);
+      border-right:1px solid var(--line);overflow:auto
+    }
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:28px}
+    .brand-mark{
+      width:44px;height:44px;border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;place-items:center;color:#06111f;font-weight:900;box-shadow:var(--shadow)
+    }
+    .brand h1{font-size:1rem;margin:0}.brand small{color:var(--muted)}
+    nav a{
+      display:block;text-decoration:none;color:var(--muted);
+      padding:11px 13px;border-radius:12px;margin:4px 0;transition:.2s ease;
+      border:1px solid transparent
+    }
+    nav a:hover,nav a:focus{color:var(--text);background:rgba(255,255,255,.05);border-color:var(--line)}
+    .aside-meta{
+      margin-top:28px;padding-top:20px;border-top:1px solid var(--line);
+      color:var(--muted);font-size:.88rem
+    }
+    main{padding:40px clamp(22px,5vw,72px) 60px;max-width:1500px;width:100%}
+    .hero{
+      padding:clamp(28px,5vw,58px);
+      border:1px solid var(--line);border-radius:28px;
+      background:linear-gradient(145deg,rgba(19,35,58,.93),rgba(8,20,36,.93));
+      box-shadow:var(--shadow);position:relative;overflow:hidden
+    }
+    .hero:after{
+      content:"";position:absolute;width:320px;height:320px;border-radius:50%;
+      right:-120px;top:-110px;background:radial-gradient(circle,rgba(94,234,212,.3),transparent 65%)
+    }
+    .eyebrow{
+      display:inline-flex;gap:8px;align-items:center;
+      color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem
+    }
+    .hero h2{font-size:clamp(2.3rem,6vw,5.2rem);line-height:.98;margin:18px 0 18px;max-width:900px}
+    .hero p{font-size:1.1rem;color:var(--muted);max-width:820px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .chip{
+      border:1px solid var(--line);padding:8px 12px;border-radius:999px;
+      color:#d7e8fb;background:rgba(255,255,255,.035);font-size:.9rem
+    }
+    section{scroll-margin-top:28px;margin-top:34px}
+    .section-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}
+    .section-title h3{font-size:clamp(1.55rem,3vw,2.35rem);margin:0}
+    .section-title span{color:var(--muted);font-size:.92rem}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .card{
+      padding:24px;border-radius:var(--radius);border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(19,35,58,.85),rgba(11,26,45,.82));
+      box-shadow:0 12px 32px rgba(0,0,0,.16)
+    }
+    .card .number{
+      width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+      font-weight:900;color:#06111f;background:linear-gradient(135deg,var(--accent),var(--accent-2));margin-bottom:14px
+    }
+    .card h4{font-size:1.2rem;margin:0 0 10px}
+    .card p{color:var(--muted);margin:0 0 12px}
+    .card ul{margin:10px 0 0;padding-left:20px;color:#dbe8f7}
+    .card li{margin:6px 0}
+    .callout{
+      padding:24px;border-left:4px solid var(--accent);border-radius:14px;
+      background:rgba(94,234,212,.07);color:#dffcf7
+    }
+    .models{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .model{padding:22px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.035)}
+    .model strong{display:block;font-size:1.12rem;margin-bottom:8px}.model p{margin:0;color:var(--muted)}
+    table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.025)}
+    th,td{padding:16px;text-align:left;border-bottom:1px solid var(--line)}
+    th{background:rgba(255,255,255,.05);color:var(--accent)}
+    td{color:#d9e7f5}
+    footer{
+      margin-top:42px;padding:24px;border-top:1px solid var(--line);
+      color:var(--muted);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap
+    }
+    footer a{color:var(--accent);font-weight:750;text-decoration:none}
+    .top-link{display:inline-block;margin-top:16px;color:var(--accent);text-decoration:none;font-weight:700}
+    @media (max-width:900px){
+      .layout{grid-template-columns:1fr}
+      aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+      nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+      main{padding:24px}
+      .grid,.models{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){nav{grid-template-columns:1fr}.hero h2{font-size:2.35rem}}
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">
+        <div class="brand-mark">5.6</div>
+        <div><h1>GPT-5.6 Sol</h1><small>Recursos e capacidades</small></div>
+      </div>
+      <nav aria-label="Menu principal">
+        <a href="#visao-geral">Visão geral</a>
+        <a href="#raciocinio">Raciocínio max</a>
+        <a href="#ultra">Modo ultra</a>
+        <a href="#programacao">Programação</a>
+        <a href="#ferramentas">Ferramentas</a>
+        <a href="#trabalho">Trabalho profissional</a>
+        <a href="#ciencia">Pesquisa científica</a>
+        <a href="#factualidade">Erros factuais</a>
+        <a href="#seguranca">Cibersegurança</a>
+        <a href="#familia">Família GPT-5.6</a>
+        <a href="#disponibilidade">Disponibilidade</a>
+        <a href="#creditos">Créditos</a>
+      </nav>
+      <div class="aside-meta">
+        <strong>Fonte informada:</strong> OpenAI<br>
+        <strong>Autoria:</strong> Kildere Sobral Irineu
+      </div>
+    </aside>
+
+    <main>
+      <header class="hero" id="visao-geral">
+        <div class="eyebrow">OpenAI · visão consolidada</div>
+        <h2>GPT-5.6 Sol</h2>
+        <p>
+          Um modelo apresentado como voltado a raciocínio profundo, execução de tarefas complexas,
+          programação, pesquisa científica, uso de ferramentas e coordenação de fluxos com múltiplas etapas.
+        </p>
+        <div class="chips">
+          <span class="chip">Raciocínio max</span>
+          <span class="chip">Modo ultra</span>
+          <span class="chip">Subagentes</span>
+          <span class="chip">Engenharia de software</span>
+          <span class="chip">Pesquisa científica</span>
+          <span class="chip">Cibersegurança</span>
+        </div>
+      </header>
+
+      <section>
+        <div class="section-title"><h3>Principais recursos</h3><span>Visão organizada por capacidade</span></div>
+        <div class="grid">
+          <article class="card" id="raciocinio">
+            <div class="number">1</div>
+            <h4>Raciocínio mais profundo — modo <code>max</code></h4>
+            <p>O modo <code>max</code> amplia o esforço de raciocínio para tarefas em que qualidade e profundidade importam mais que velocidade.</p>
+            <ul>
+              <li>Analisar contratos e documentos extensos.</li>
+              <li>Resolver problemas técnicos complexos.</li>
+              <li>Revisar hipóteses antes de responder.</li>
+              <li>Desenvolver estratégias com várias etapas.</li>
+              <li>Verificar resultados e identificar inconsistências.</li>
+            </ul>
+          </article>
+
+          <article class="card" id="ultra">
+            <div class="number">2</div>
+            <h4>Modo <code>ultra</code> com subagentes</h4>
+            <p>O modo <code>ultra</code> distribui partes de um trabalho complexo entre agentes especializados, superando o fluxo tradicional de um único agente.</p>
+            <ul>
+              <li>Pesquisa de fontes.</li>
+              <li>Análise documental.</li>
+              <li>Verificação de cálculos.</li>
+              <li>Produção de código.</li>
+              <li>Revisão de riscos.</li>
+              <li>Consolidação do relatório final.</li>
+            </ul>
+          </article>
+
+          <article class="card" id="programacao">
+            <div class="number">3</div>
+            <h4>Programação e engenharia de software</h4>
+            <p>Avanços apresentados para planejamento, execução, depuração, testes e validação em bases de código e ambientes reais.</p>
+            <ul>
+              <li>Planejamento de alterações em código.</li>
+              <li>Execução de comandos no terminal.</li>
+              <li>Depuração e correção de erros.</li>
+              <li>Coordenação de ferramentas.</li>
+              <li>Desenvolvimento de funcionalidades completas.</li>
+              <li>Testes e tarefas prolongadas de engenharia.</li>
+            </ul>
+            <p>Aplicações citadas: Google Apps Script, Python, React, FastAPI, Codex CLI, bancos de dados e modernização de sistemas.</p>
+          </article>
+
+          <article class="card" id="ferramentas">
+            <div class="number">4</div>
+            <h4>Uso autônomo de ferramentas e computadores</h4>
+            <p>A proposta é atuar não apenas como sistema de perguntas e respostas, mas como agente executor em fluxos profissionais.</p>
+            <ul>
+              <li>Uso de aplicações.</li>
+              <li>Navegação entre ferramentas.</li>
+              <li>Execução de fluxos com múltiplas etapas.</li>
+              <li>Manipulação de arquivos.</li>
+              <li>Operação assistida de ambientes computacionais.</li>
+              <li>Conclusão de tarefas profissionais mais completas.</li>
+            </ul>
+          </article>
+
+          <article class="card" id="trabalho">
+            <div class="number">5</div>
+            <h4>Melhor trabalho profissional</h4>
+            <p>O modelo foi descrito como aprimorado para atividades de alta complexidade e entregáveis profissionais.</p>
+            <ul>
+              <li>Elaboração e revisão de relatórios.</li>
+              <li>Análise jurídica e contratual.</li>
+              <li>Pesquisa técnica e planejamento estratégico.</li>
+              <li>Análise financeira e ciência de dados.</li>
+              <li>Consolidação de documentos.</li>
+              <li>Produção de entregáveis profissionais.</li>
+            </ul>
+            <p>A expectativa é manter coerência durante trabalhos longos, considerando requisitos, documentos, ferramentas e verificações intermediárias.</p>
+          </article>
+
+          <article class="card" id="ciencia">
+            <div class="number">6</div>
+            <h4>Pesquisa científica</h4>
+            <p>Capacidades apresentadas para áreas de alta complexidade analítica.</p>
+            <ul>
+              <li>Genômica.</li>
+              <li>Biologia quantitativa.</li>
+              <li>Bioinformática.</li>
+              <li>Análise estatística científica.</li>
+              <li>Interpretação de dados experimentais.</li>
+              <li>Tarefas científicas de longo horizonte.</li>
+            </ul>
+            <p>No material de referência, o modelo é associado a desempenho superior no GeneBench v1, utilizando menos tokens.</p>
+          </article>
+
+          <article class="card" id="factualidade">
+            <div class="number">7</div>
+            <h4>Menos erros factuais</h4>
+            <p>As avaliações preliminares descritas apontam redução de erros factuais e maior resistência a algumas formas de alucinação.</p>
+            <ul>
+              <li>Ligeiramente menos erros factuais que o GPT-5.5.</li>
+              <li>Menor repetição de informações incorretas apontadas por usuários.</li>
+              <li>Melhor resistência a certas formas de alucinação.</li>
+            </ul>
+            <p>A verificação de fontes continua indispensável em questões jurídicas, médicas, financeiras e administrativas.</p>
+          </article>
+
+          <article class="card" id="seguranca">
+            <div class="number">8</div>
+            <h4>Capacidades avançadas de cibersegurança</h4>
+            <p>Recursos reforçados para atividades defensivas e autorizadas.</p>
+            <ul>
+              <li>Revisão de código seguro.</li>
+              <li>Identificação de vulnerabilidades.</li>
+              <li>Desenvolvimento de correções.</li>
+              <li>Depuração de falhas.</li>
+              <li>Testes defensivos.</li>
+              <li>Pesquisa autorizada de segurança.</li>
+            </ul>
+            <p>O material também menciona controles adicionais para solicitações relacionadas a cibersegurança e biologia.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="familia">
+        <div class="section-title"><h3>Família GPT-5.6</h3><span>Três posicionamentos</span></div>
+        <div class="models">
+          <div class="model"><strong>GPT-5.6 Sol</strong><p>Modelo principal, mais poderoso e voltado a tarefas difíceis.</p></div>
+          <div class="model"><strong>GPT-5.6 Terra</strong><p>Equilíbrio entre capacidade, velocidade e custo.</p></div>
+          <div class="model"><strong>GPT-5.6 Luna</strong><p>Modelo mais rápido e econômico para grande volume.</p></div>
+        </div>
+      </section>
+
+      <section id="disponibilidade">
+        <div class="section-title"><h3>Disponibilidade atual</h3><span>Conforme o material-base</span></div>
+        <div class="callout">
+          Durante a prévia, os modelos Sol, Terra e Luna são apresentados como disponíveis para um grupo limitado de organizações,
+          por meio da API da OpenAI e do Codex. Um plano ChatGPT pago, isoladamente, não garantiria acesso.
+          O material também informa que não havia data definitiva de liberação geral.
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title"><h3>Síntese executiva</h3><span>O ponto central</span></div>
+        <table>
+          <thead><tr><th>Dimensão</th><th>Evolução apresentada</th></tr></thead>
+          <tbody>
+            <tr><td>Raciocínio</td><td>Maior profundidade e verificação no modo <code>max</code>.</td></tr>
+            <tr><td>Execução</td><td>Decomposição de tarefas e coordenação por subagentes no modo <code>ultra</code>.</td></tr>
+            <tr><td>Engenharia</td><td>Mais capacidade de planejar, programar, testar, depurar e operar ferramentas.</td></tr>
+            <tr><td>Confiabilidade</td><td>Redução preliminar de erros factuais, sem dispensar validação humana.</td></tr>
+            <tr><td>Aplicação</td><td>Foco em trabalhos complexos, extensos e profissionalmente estruturados.</td></tr>
+          </tbody>
+        </table>
+        <p class="callout" style="margin-top:18px">
+          Em síntese, a principal evolução descrita não é apenas “responder melhor”, mas conseguir
+          <strong>decompor, executar, verificar e consolidar trabalhos complexos</strong>.
+        </p>
+      </section>
+
+      <footer id="creditos">
+        <div><strong>Fonte:</strong> OpenAI</div>
+        <div><strong>Autoria:</strong> <a href="https://www.linkedin.com/in/kilderesobralirineu/" target="_blank" rel="noopener noreferrer">Kildere Sobral Irineu</a></div>
+      </footer>
+      <a class="top-link" href="#visao-geral">↑ Voltar ao topo</a>
+    </main>
+  </div>
+</body>
+</html>
